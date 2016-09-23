@@ -20,6 +20,12 @@ class MoviesController < ApplicationController
     else
       @movies = Movie.all
     end
+    if params[:ratings]
+      @movies = @movies.where("rating IN (?)", params[:ratings].keys)
+      @ratings = params[:ratings]
+    elsif 
+      @ratings = Movie.all_ratings
+    end
     @all_ratings = Movie.all_ratings
   end
 
